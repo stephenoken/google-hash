@@ -1,14 +1,6 @@
 class Bootstrap
   def initialize
-    $text_file = IO.readlines("busy_day.in")
-    scenarioConfig = $text_file[0].split
-    $table = {
-      :rows => scenarioConfig[0],
-      :cols => scenarioConfig[1],
-      :drones => scenarioConfig[2],
-      :turns => scenarioConfig[3],
-      :max_payload => scenarioConfig[4]
-    }
+    $text_file = IO.readlines("example.in")
 
     $products = $text_file[2].split
     # puts $products
@@ -16,14 +8,24 @@ class Bootstrap
     # number_of_warehouses = $text_file[3..-1]
     # puts number_of_warehouses
     number_of_warehouses = $text_file[3].to_i
-    warehouses = get_warehouse(number_of_warehouses,4)
-    puts warehouses
+    $warehouses = get_warehouse(number_of_warehouses,4)
+    puts $warehouses
 
     orders_index = 4 + (2 * number_of_warehouses)
     number_of_orders = $text_file[orders_index].to_i
     puts number_of_orders
 
     puts get_orders(number_of_orders,orders_index+1)
+
+    scenarioConfig = $text_file[0].split
+    $table = {
+      :rows => scenarioConfig[0],
+      :cols => scenarioConfig[1],
+      :drones => createDrone(scenarioConfig[2].to_i),
+      :turns => scenarioConfig[3],
+      :max_payload => scenarioConfig[4]
+    }
+    puts $table[:drones]
   end
 
   def get_warehouse(number_of_warehouses,index)
@@ -55,27 +57,15 @@ class Bootstrap
 
     return arr
   end
-end
 
-class Drone
-  def initialize()
-
-  end
-
-  def load
-
-  end
-
-  def deliver
-
-  end
-
-  def unload
-
-  end
-
-  def wait
-
+  def createDrone(number_of_drones)
+    drone = {
+      :location => $warehouses[0][:coordinates]
+    }
+    if(number_of_drones == 1)
+      return drone
+    end
+    return [].push(drone).push(createDrone(number_of_drones-1))
   end
 end
 bootstrap = Bootstrap.new
