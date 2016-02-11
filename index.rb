@@ -9,12 +9,30 @@ class Bootstrap
       :turns => scenarioConfig[3],
       :max_payload => scenarioConfig[4]
     }
-    puts $table
+
+    $products = textFile[2].split
+    puts $products[0]
   end
 end
 
-class Grid
+class Drone
   def initialize()
+
+  end
+
+  def load
+
+  end
+
+  def deliver
+
+  end
+
+  def unload
+
+  end
+
+  def wait
 
   end
 end
