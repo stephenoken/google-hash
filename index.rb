@@ -11,7 +11,16 @@ class Bootstrap
     }
 
     $products = textFile[2].split
-    puts $products[0]
+    # puts $products
+
+    # number_of_warehouses = textFile[3..-1]
+    # puts number_of_warehouses
+    warehouses = get_warehouse(textFile,textFile[3])
+  end
+
+  def get_warehouse(textFile,number_of_warehouses)
+    puts number_of_warehouses
+    return number_of_warehouses
   end
 end
 
